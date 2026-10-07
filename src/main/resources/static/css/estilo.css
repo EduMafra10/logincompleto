@@ -103,3 +103,30 @@ h1 {
     color: #0f5132;
     background-color: #d1e7dd;
 }
+
+a {
+    color: var(--cor-primaria);
+}
+
+.link-acesso {
+    margin: 20px 0 0;
+    text-align: center;
+}
+
+.ajuda {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--cor-texto-secundario);
+}
+
+.lista-erros {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.identificacao {
+    overflow-wrap: anywhere;
+}
+
