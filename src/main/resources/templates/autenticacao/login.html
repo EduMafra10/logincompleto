@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Login Seguro</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body class="pagina-autenticacao">
+
+    <main class="cartao">
+        <h1>Login Seguro</h1>
+        <p class="descricao">Entre com seu e-mail e senha.</p>
+
+        <div class="mensagem mensagem-erro"
+            th:if="${param.erro != null}"
+            role="alert">
+            E-mail ou senha inválidos.
+        </div>
+
+        <div class="mensagem mensagem-sucesso"
+            th:if="${param.logout != null}"
+            role="status">
+            Você saiu da sua conta.
+        </div>
+
+        <div class="mensagem mensagem-sucesso"
+            th:if="${param.cadastro != null}"
+            role="status">
+            Cadastro realizado. Entre com seus dados.
+        </div>
+
+        <form class="formulario" th:action="@{/login}" method="post">
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       autocomplete="username"
+                       maxlength="254"
+                       required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password"
+                       id="senha"
+                       name="senha"
+                       autocomplete="current-password"
+                       required>
+            </div>
+
+            <button class="botao" type="submit">Entrar</button>
+        </form>
+    </main>
+    
+</body>
+</html>
