@@ -1,0 +1,132 @@
+:root {
+    --cor-fundo: #f3f5f7;
+    --cor-superficie: #ffffff;
+    --cor-texto: #1f2937;
+    --cor-texto-secundario: #526071;
+    --cor-primaria: #1d4ed8;
+    --cor-borda: #cbd5e1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+}
+
+.pagina-autenticacao {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.cartao {
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.descricao {
+    margin: 0 0 24px;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+}
+
+.formulario {
+    display: grid;
+    gap: 16px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    font: inherit;
+    color: var(--cor-texto);
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+}
+
+.campo input:focus-visible,
+.botao:focus-visible {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+.botao {
+    padding: 12px;
+    font: inherit;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--cor-primaria);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.botao:hover {
+    filter: brightness(0.9);
+}
+
+.mensagem {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+.mensagem-erro {
+    color: #842029;
+    background-color: #f8d7da;
+}
+
+.mensagem-sucesso {
+    color: #0f5132;
+    background-color: #d1e7dd;
+}
+
+a {
+    color: var(--cor-primaria);
+}
+
+.link-acesso {
+    margin: 20px 0 0;
+    text-align: center;
+}
+
+.ajuda {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--cor-texto-secundario);
+}
+
+.lista-erros {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.identificacao {
+    overflow-wrap: anywhere;
+}
+
