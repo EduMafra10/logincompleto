@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${titulo}">Painel</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body class="pagina-autenticacao">
+
+    <main class="cartao">
+        <h1 th:text="${titulo}"></h1>
+        <p class="descricao" th:text="${descricao}"></p>
+
+        <a th:href="@{/inicio}">Voltar ao início</a>
+    </main>
+
+</body>
+</html>
