@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/layout :: cabecalho('Editar usuário')}"></head>
+<body class="pagina-autenticacao">
+
+    <main class="cartao">
+        <h1>Editar usuário</h1>
+
+        <p class="descricao">
+            Altere o perfil e a situação desta conta.
+        </p>
+
+        <p class="identificacao">
+            <strong th:text="${usuario.nome}">Nome</strong>
+            <br>
+            <span th:text="${usuario.email}">E-mail</span>
+        </p>
+
+        <form class="formulario"
+              method="post"
+              th:action="@{/admin/usuarios/{id}/editar(id=${usuario.id})}"
+              th:object="${edicao}">
+
+            <div class="mensagem mensagem-erro"
+                 role="alert"
+                 th:if="${#fields.hasGlobalErrors()}">
+
+                <p th:each="erro : ${#fields.globalErrors()}"
+                   th:text="${erro}">
+                    Não foi possível salvar.
+                </p>
+            </div>
+
+            <div class="campo">
+                <label for="perfil">Perfil</label>
+
+                <select id="perfil" th:field="*{perfil}" required>
+                    <option value="">Selecione um perfil</option>
+
+                    <option th:each="opcao : ${perfis}"
+                            th:value="${opcao}"
+                            th:text="${opcao}">
+                    </option>
+                </select>
+
+                <p class="mensagem mensagem-erro"
+                   th:if="${#fields.hasErrors('perfil')}"
+                   th:errors="*{perfil}">
+                    Selecione um perfil válido.
+                </p>
+            </div>
+
+            <div class="campo">
+                <label for="ativo">Situação</label>
+
+                <select id="ativo" th:field="*{ativo}" required>
+                    <option value="">Selecione uma situação</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                </select>
+
+                <p class="mensagem mensagem-erro"
+                   th:if="${#fields.hasErrors('ativo')}"
+                   th:errors="*{ativo}">
+                    Selecione uma situação válida.
+                </p>
+            </div>
+
+            <p class="ajuda">
+                Ao alterar o perfil ou a situação, as sessões
+                dessa conta serão encerradas.
+            </p>
+
+            <button class="botao" type="submit">
+                Salvar alterações
+            </button>
+        </form>
+
+        <p class="link-acesso">
+            <a th:href="@{/admin/usuarios}">
+                Voltar à lista de usuários
+            </a>
+        </p>
+    </main>
+
+</body>
+</html>

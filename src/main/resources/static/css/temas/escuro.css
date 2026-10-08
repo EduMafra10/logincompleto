@@ -1,0 +1,17 @@
+:root {
+    color-scheme: dark;
+
+    --cor-fundo: #0f172a;
+    --cor-superficie: #1e293b;
+    --cor-texto: #f8fafc;
+    --cor-texto-secundario: #cbd5e1;
+    --cor-primaria: #93c5fd;
+    --cor-borda: #64748b;
+    --cor-botao-texto: #0f172a;
+
+    --cor-erro-texto: #fecaca;
+    --cor-erro-fundo: #450a0a;
+
+    --cor-sucesso-texto: #bbf7d0;
+    --cor-sucesso-fundo: #052e16;
+}

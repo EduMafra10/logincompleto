@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragmentos/layout :: cabecalho('Início')}">
+</head>
+
+<body class="pagina-autenticacao">
+
+    <main class="cartao">
+        <h1>Bem-vindo!</h1>
+        <p class="descricao">Você acessou sua conta.</p>
+
+        <p class="identificacao">
+            Conectado como:
+            <strong th:text="${email}"></strong>
+        </p>
+
+        <form class="formulario"
+              th:action="@{/logout}"
+              method="post">
+            <button class="botao" type="submit">
+                Sair
+            </button>
+        </form>
+
+        <nav class="link-acesso"
+             aria-label="Áreas do sistema"
+             sec:authorize="hasAnyRole('MODERADOR', 'ADMINISTRADOR')">
+
+            <p>
+                <a th:href="@{/moderacao}">
+                    Acessar moderação
+                </a>
+            </p>
+
+            <p sec:authorize="hasRole('ADMINISTRADOR')">
+                <a th:href="@{/admin}">
+                    Acessar administração
+                </a>
+            </p>
+        </nav>
+    </main>
+
+</body>
+</html>

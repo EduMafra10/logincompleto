@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/layout :: cabecalho('Cadastro')}"></head>
+<body class="pagina-autenticacao">
+
+    <main class="cartao">
+        <h1>Criar conta</h1>
+        <p class="descricao">Preencha seus dados para começar.</p>
+
+        <form class="formulario"
+              th:action="@{/cadastro}"
+              th:object="${cadastro}"
+              method="post">
+
+            <div class="mensagem mensagem-erro"
+                 th:if="${#fields.hasAnyErrors()}"
+                 role="alert">
+                <ul class="lista-erros">
+                    <li th:each="erro : ${#fields.allErrors()}"
+                        th:text="${erro}">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input type="text"
+                       id="nome"
+                       th:field="*{nome}"
+                       autocomplete="name"
+                       minlength="2"
+                       maxlength="100"
+                       required>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email"
+                       id="email"
+                       th:field="*{email}"
+                       autocomplete="email"
+                       maxlength="254"
+                       required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password"
+                       id="senha"
+                       name="senha"
+                       autocomplete="new-password"
+                       minlength="15"
+                       maxlength="72"
+                       aria-describedby="ajuda-senha"
+                       required>
+
+                <small id="ajuda-senha" class="ajuda">
+                    Use pelo menos 15 caracteres. Você pode usar uma frase.
+                </small>
+            </div>
+
+            <div class="campo">
+                <label for="confirmacaoSenha">Confirme a senha</label>
+                <input type="password"
+                       id="confirmacaoSenha"
+                       name="confirmacaoSenha"
+                       autocomplete="new-password"
+                       maxlength="72"
+                       required>
+            </div>
+
+            <button class="botao" type="submit">Criar conta</button>
+        </form>
+
+        <p class="link-acesso">
+            Já tem uma conta?
+            <a th:href="@{/login}">Entrar</a>
+        </p>
+    </main>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.loginseguro</groupId>
 	<artifactId>logincompleto</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name/>
 	<description/>
 	<url/>
@@ -80,8 +80,18 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+    		<groupId>org.mongodb</groupId>
+    		<artifactId>mongodb-spring-session</artifactId>
+    		<version>4.0.0</version>
+		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
