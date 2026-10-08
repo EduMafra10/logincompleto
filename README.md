@@ -222,5 +222,3 @@ O projeto utiliza a organização do Gitflow:
 - `develop`: integração das funcionalidades.
 - `feature/*`: desenvolvimento das funcionalidades.
 - `release/*`: preparação da versão de entrega.
-
-As alterações são validadas antes de sua integração na versão final.
