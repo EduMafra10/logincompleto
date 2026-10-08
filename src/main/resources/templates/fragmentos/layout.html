@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="cabecalho(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${titulo + ' | Login Seguro'}">
+        Login Seguro
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/estilo.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/temas/{tema}.css(tema=${temaVisual})}">
+</head>
+
+<body>
+</body>
+</html>

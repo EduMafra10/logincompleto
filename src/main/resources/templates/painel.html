@@ -2,14 +2,8 @@
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="~{fragmentos/layout :: cabecalho(${titulo})}"></head>
 
-    <title th:text="${titulo}">Painel</title>
-
-    <link rel="stylesheet" th:href="@{/css/estilo.css}">
-</head>
 <body class="pagina-autenticacao">
 
     <main class="cartao">
