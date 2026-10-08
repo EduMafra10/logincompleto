@@ -2,14 +2,10 @@
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Início | Login Seguro</title>
-
-    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+<head th:replace="~{fragmentos/layout :: cabecalho('Início')}">
 </head>
+
 <body class="pagina-autenticacao">
 
     <main class="cartao">
@@ -21,8 +17,12 @@
             <strong th:text="${email}"></strong>
         </p>
 
-        <form class="formulario" th:action="@{/logout}" method="post">
-            <button class="botao" type="submit">Sair</button>
+        <form class="formulario"
+              th:action="@{/logout}"
+              method="post">
+            <button class="botao" type="submit">
+                Sair
+            </button>
         </form>
 
         <nav class="link-acesso"
@@ -30,11 +30,15 @@
              sec:authorize="hasAnyRole('MODERADOR', 'ADMINISTRADOR')">
 
             <p>
-                <a th:href="@{/moderacao}">Acessar moderação</a>
+                <a th:href="@{/moderacao}">
+                    Acessar moderação
+                </a>
             </p>
 
             <p sec:authorize="hasRole('ADMINISTRADOR')">
-                <a th:href="@{/admin}">Acessar administração</a>
+                <a th:href="@{/admin}">
+                    Acessar administração
+                </a>
             </p>
         </nav>
     </main>
