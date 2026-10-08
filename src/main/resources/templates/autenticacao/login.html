@@ -31,6 +31,13 @@
             Cadastro realizado. Entre com seus dados.
         </div>
 
+        <div class="mensagem mensagem-erro"
+            role="alert"
+            th:if="${param.sessao != null}">
+        Sua sessão foi encerrada porque os dados de acesso mudaram.
+        Entre novamente com uma conta ativa.
+        </div>
+
         <form class="formulario" th:action="@{/login}" method="post">
             <div class="campo">
                 <label for="email">E-mail</label>

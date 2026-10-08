@@ -5,7 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 
+import br.com.loginseguro.seguranca.VerificacaoSessaoFilter;
+import br.com.loginseguro.seguranca.VerificacaoSessaoService;
 import br.com.loginseguro.usuario.Perfil;
 import jakarta.servlet.DispatcherType;
 
@@ -14,7 +17,9 @@ import jakarta.servlet.DispatcherType;
 public class SegurancaConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            VerificacaoSessaoService verificacaoSessaoService)
             throws Exception {
 
         http
@@ -58,6 +63,11 @@ public class SegurancaConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
+
+        http.addFilterBefore(
+                new VerificacaoSessaoFilter(verificacaoSessaoService),
+                AuthorizationFilter.class
+        );
 
         return http.build();
     }
