@@ -2,6 +2,8 @@ package br.com.loginseguro.seguranca;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -9,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,6 +19,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -34,6 +38,15 @@ class ControleAcessoTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockitoBean
+    private VerificacaoSessaoService verificacaoSessaoService;
+
+    @BeforeEach
+    void configurarVerificacaoDasSessoes() {
+        when(verificacaoSessaoService.estaValida(any(Authentication.class)))
+                .thenReturn(true);
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {"/inicio", "/admin", "/moderacao"})
@@ -99,5 +112,18 @@ class ControleAcessoTest {
                         containsString("href=\"/admin\"")))
                 .andExpect(content().string(
                         containsString("href=\"/moderacao\"")));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "administrador@exemplo.com",
+            roles = "ADMINISTRADOR")
+    void deveEncerrarSessaoComPermissoesDesatualizadas() throws Exception {
+        when(verificacaoSessaoService.estaValida(any(Authentication.class)))
+                .thenReturn(false);
+
+        mockMvc.perform(get("/admin"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/login?sessao=atualizada"));
     }
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários | Login Seguro</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body class="pagina-autenticacao">
+
+    <main class="cartao cartao-amplo">
+        <h1>Usuários</h1>
+
+        <p class="descricao">
+            Total de contas:
+            <strong th:text="${paginaUsuarios.totalElements}">0</strong>
+        </p>
+
+        <div class="mensagem mensagem-sucesso"
+             role="status"
+             th:if="${sucesso != null}"
+             th:text="${sucesso}">
+        </div>
+
+        <div class="tabela-container"
+             tabindex="0"
+             role="region"
+             aria-label="Lista de usuários">
+
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Perfil</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="usuario : ${paginaUsuarios.content}">
+                        <td th:text="${usuario.nome}"></td>
+                        <td th:text="${usuario.email}"></td>
+                        <td th:text="${usuario.perfil}"></td>
+                        <td th:text="${usuario.ativo ? 'Ativo' : 'Inativo'}"></td>
+
+                        <td>
+                            <a th:href="@{/admin/usuarios/{id}/editar(id=${usuario.id})}">
+                                Editar
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${paginaUsuarios.isEmpty()}">
+                        <td colspan="5">Nenhum usuário cadastrado.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="paginacao"
+             aria-label="Paginação dos usuários"
+             th:if="${paginaUsuarios.totalPages > 0}">
+
+            <a th:if="${paginaUsuarios.hasPrevious()}"
+               th:href="@{/admin/usuarios(pagina=${paginaUsuarios.number - 1})}">
+                Anterior
+            </a>
+
+            <span th:text="|Página ${paginaUsuarios.number + 1} de ${paginaUsuarios.totalPages}|">
+                Página 1 de 1
+            </span>
+
+            <a th:if="${paginaUsuarios.hasNext()}"
+               th:href="@{/admin/usuarios(pagina=${paginaUsuarios.number + 1})}">
+                Próxima
+            </a>
+        </nav>
+
+        <a th:href="@{/admin}">Voltar à administração</a>
+    </main>
+
+</body>
+</html>
